@@ -1,6 +1,8 @@
+# Cuda thinkering
 
+Amuzing myself with CUDA C
 
-
+## Installation of the project
 You need nvcc installed to compile.
 
 You need gcc 13 to compile: 
@@ -10,7 +12,7 @@ On fedora systems :
 sudo dnf install gcc13 gcc13-c++
 ```
 
-## Fedora 
+### Fedora 
 
 You need to install Nvidia drivers FROM RPM FUSION, do not install it from Nvidia website: 
 https://rpmfusion.org/Howto/NVIDIA
@@ -31,6 +33,12 @@ You may want to add the CUDAS binaries to your path to use NVCC:
 ### DEBUG 
 ```sh
 sudo dmesg | grep nvidia
+```
+
+## Run the project
+
+```sh
+make run script=<add/hello....>
 ```
 
 

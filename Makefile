@@ -21,13 +21,13 @@ clean: # Remove all generated binaries
 
 .ONESHELL:
 build: clean # Build the server 
-	sudo ln -s /usr/bin/gcc-13 /usr/local/cuda/bin/gcc 
-	sudo ln -s /usr/bin/g++-13 /usr/local/cuda/bin/g++
-	@$(CC) $(CFLAGS) -g -o hello src/hello.cu
+	@sudo ln -s /usr/bin/gcc-13 /usr/local/cuda/bin/gcc || true
+	@sudo ln -s /usr/bin/g++-13 /usr/local/cuda/bin/g++ || true
+	$(CC) $(CFLAGS) -g -o $(script) src/$(script).cu
 
 .PHONY:
 .ONESHELL:
 run: build # Build and launch the cuda code
-	@killall hello 2>/dev/null
-	./hello
+	@killall $(script) 2>/dev/null
+	./$(script)
 
