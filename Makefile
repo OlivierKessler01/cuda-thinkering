@@ -1,5 +1,5 @@
 CC = nvcc 
-CFLAGS = -arch=compute_61 -code=sm_61 
+CFLAGS = -arch=compute_61 -code=sm_61
 RED    := \033[31m
 GREEN  := \033[32m
 YELLOW := \033[33m
@@ -19,7 +19,10 @@ help: # Print help on Makefile
 clean: # Remove all generated binaries
 	@rm -rf columnarc columnard *_test
 
+.ONESHELL:
 build: clean # Build the server 
+	sudo ln -s /usr/bin/gcc-13 /usr/local/cuda/bin/gcc 
+	sudo ln -s /usr/bin/g++-13 /usr/local/cuda/bin/g++
 	@$(CC) $(CFLAGS) -g -o hello src/hello.cu
 
 .PHONY:
