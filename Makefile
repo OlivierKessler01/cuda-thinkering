@@ -27,7 +27,7 @@ build: clean # Build the server
 
 .PHONY:
 .ONESHELL:
-run: build # Build and launch the cuda code
+run: build # Build and launch the cuda code `make run script=<>`
 	@killall $(script) 2>/dev/null
-	./$(script)
+	time ./$(script)
 

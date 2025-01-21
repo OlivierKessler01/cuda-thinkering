@@ -9,7 +9,8 @@ __global__ void add(float *a, float *b, float *c, int N) {
 }
 
 int main(void) {
-  int N = 8;
+  int N = 1000000000;
+
   size_t size = N * sizeof(float);
   float *a, *b, *c, *d_a, *d_b, *d_c;
 
@@ -30,7 +31,7 @@ int main(void) {
   cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
   cudaMemcpy(d_c, c, size, cudaMemcpyHostToDevice);
 
-  add<<<2, 4>>>(d_a, d_b, d_c, N);
+  add<<<1000000, 1000>>>(d_a, d_b, d_c, N);
 
   cudaError_t cudaerr = cudaDeviceSynchronize();
   if (cudaerr != cudaSuccess)
@@ -38,11 +39,6 @@ int main(void) {
            cudaGetErrorString(cudaerr));
 
   cudaMemcpy(c, d_c, size, cudaMemcpyDeviceToHost);
-
-  printf("Results : \n");
-  for (int i = 0; i < N; i++) {
-    printf("%f + %f = %f \n", a[i], b[i], c[i]);
-  }
 
   return 0;
 }
