@@ -42,7 +42,7 @@ nvprof: build # Build and profile the cuda code with nvprof (deprecated) `make n
 nsys-cli: build # Builds and profile the cuda code with Nsys-cli `make nsys script=<>`
 	@killall $(script) 2>/dev/null
 	@rm ./output.nsys-rep ./output.sqlit || true
-	nsys profile -o output ./$(script) 
+	nsys profile --cuda-memory-usage="true" -o output ./$(script) 
 	nsys stats ./output.nsys-rep
 
 .PHONY:
@@ -50,5 +50,5 @@ nsys-cli: build # Builds and profile the cuda code with Nsys-cli `make nsys scri
 nsys-ui: build # Builds and profile the cuda code with Nsys-ui `make nsys script=<>`
 	@killall $(script) 2>/dev/null
 	@rm ./output.nsys-rep ./output.sqlite || true
-	nsys profile -o output ./$(script) 
+	nsys profile --cuda-memory-usage="true" -o output ./$(script) 
 	nsys-ui ./output.nsys-rep
