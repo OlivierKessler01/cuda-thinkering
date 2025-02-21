@@ -1,3 +1,8 @@
+/**
+ * Add a huge amount of float on a CPU
+ * Made to be a comparison point for the same computation over GPUs (see add.cu)
+ */
+
 #include <stdio.h>
 
 __global__ void add(float *a, float *b, float *c, int N) {
@@ -9,9 +14,9 @@ __global__ void add(float *a, float *b, float *c, int N) {
 }
 
 int main(void) {
-  int N = 1000000000;
+  int N = 1 <<26;
   size_t size = N * sizeof(float);
-  float *a, *b, *c, *d_a, *d_b;
+  float *a, *b, *c;
 
   a = (float *)malloc(size);
   b = (float *)malloc(size);

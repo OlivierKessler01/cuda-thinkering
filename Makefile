@@ -31,3 +31,24 @@ run: build # Build and launch the cuda code `make run script=<>`
 	@killall $(script) 2>/dev/null
 	time ./$(script)
 
+.PHONY:
+.ONESHELL:
+nvprof: build # Build and profile the cuda code with nvprof (deprecated) `make nvprof script=<>`
+	@killall $(script) 2>/dev/null
+	nvprof  ./$(script)
+
+.PHONY:
+.ONESHELL:
+nsys-cli: build # Builds and profile the cuda code with Nsys-cli `make nsys script=<>`
+	@killall $(script) 2>/dev/null
+	@rm ./output.nsys-rep ./output.sqlit || true
+	nsys profile -o output ./$(script) 
+	nsys stats ./output.nsys-rep
+
+.PHONY:
+.ONESHELL:
+nsys-ui: build # Builds and profile the cuda code with Nsys-ui `make nsys script=<>`
+	@killall $(script) 2>/dev/null
+	@rm ./output.nsys-rep ./output.sqlite || true
+	nsys profile -o output ./$(script) 
+	nsys-ui ./output.nsys-rep
